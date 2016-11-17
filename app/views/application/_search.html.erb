@@ -1,0 +1,12 @@
+<form action="/search" id="searchForm">
+  <div class="col-md-8 col-sm-8">
+    <div class="form-group">
+      <input type="hidden" name="lat" id="inputLat"/>
+      <input type="hidden" name="lng" id="inputLng">
+      <input type="text" class="form-control" id="autocomplete" placeholder="<%=t('search_placeholder')%>">
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4">
+  <button id="btnSearch" type="submit" class="btn btn-primary form-control"><%=t('im_hungry')%></button>
+</div>
+</form>

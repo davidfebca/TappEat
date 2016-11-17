@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= yield :head%>
+    <link rel="icon" href="<%=asset_url('marker.png')%>">
+    <link rel="stylesheet" href="<%=asset_path('application.css')%>">
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+    <%= render 'header' %>
+    <main role="main">
+       <%= yield %>
+    </main>
+    <%= render 'footer' %>
+    <script src="<%=asset_url('application.js')%>"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVAAiBOzGib0007Z77dV1f5r0TWHOV6X8&signed_in=true&signed_in=false&libraries=geometry,places"></script>
+      <%= yield :page_scripts%>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<section class="cart">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-bottom:30px;"><%=t('summary')%></h1>
+      </div>
+    </div>
+    <div class="row">
+      <% @products.each do |item|%>
+        <article class="media col-md-6 cart-product">
+          <%@image = asset_url('noPicture.png')%>
+          <%  @image = item[0].images.first.original  if item[0].images.first%>
+          <a class="pull-left" href="<%= products_details_path id:item[0].id%>">
+            <img style="max-width:170px;" data-img="<%=@image%>" src="<%=@image%>" class="media-object img-responsive" alt="<%= item[0].title %>"/>
+          </a>
+          <div class="media-body">
+            <div class="well well-lg">
+              <h4 class="media-heading text-uppercase reviews"><%= item[0].title%></h4>
+              <p><%= item[0].short_description%>
+              </p>
+              <ul>
+                <li class="color-red"><%= item[0].price %> €</li>
+                <li>Quantity: <%= item[1] %></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      <%end%>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right basket-total">
+        <hr>
+        Total: <%=@total%> €
+      </div>
+    </div>
+    <div class="pay" style="margin-bottom:30px;">
+      <%= form_tag charges_path do %>
+        <article style="margin-bottom:30px;">
+          <h2>Payment method</h2>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+
+        </article>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Tappeat order"
+          data-shipping-address = true
+          data-amount= <%=@total * 100%>
+          data-email = "<%=current_user.email%>"
+          data-locale="auto"></script>
+      <% end %>
+    </div>
+  </div>
+</section>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :head do%>
+  <title><%= t('checkout_meta_title')%></title>
+  <meta name="description" content="<%= t('checkout_meta_description')%>"/>
+<%end%>

@@ -1,0 +1,27 @@
+@mixin box-shadow($top, $left, $blur, $color) {
+  -webkit-box-shadow:inset $top $left $blur $color;
+  -moz-box-shadow:inset $top $left $blur $color;
+  box-shadow:inset $top $left $blur $color;
+}
+@mixin rounded($radius: 0.2em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin gradient($from, $to) {
+  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background: -moz-linear-gradient(top,  $from, $to);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+}
+@mixin button($color, $text_color) {
+  color:$text_color;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  padding: .5em 2em .55em;
+  border: solid 1px $color;
+  border-radius:0;
+  background: transparent;
+}

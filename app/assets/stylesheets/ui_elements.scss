@@ -1,0 +1,46 @@
+.btn {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-size: 1.3em;
+}
+
+.btn-white {
+  @include button($white, $white);
+
+  &:hover,&:focus{
+    border-color: $dark;
+    color: $dark;
+  }
+}
+
+.btn-dark {
+  @include button($dark, $dark);
+  background: lighten($dark, 20%);
+}
+
+.btn-red {
+  @include button($primary-color, $white);
+  background: $primary-color;
+
+  &:hover,&:focus{
+    color: $white;
+    background: darken($primary-color,10%);
+    border-color: darken($primary-color,10%);
+  }
+}
+
+.btn-buy {
+  display: block;
+  margin-top: 15px;
+}
+
+.btn-primary{
+  background: $primary-color;
+
+  &:hover,&:focus{
+    color: $white;
+    background: darken($primary-color,10%);
+    border-color: darken($primary-color,10%);
+  }
+}

@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <li>
+    <%= link_to current_user.name, my_account_path  %>
+    <%@image = asset_url('profile.png')%>
+    <%@image = current_user.images.first.original if current_user.images.first %>
+    <a href="<%=my_account_path %>"><img class="img-circle" width="40" height="40s" src="<%=@image%>" alt="profile logo"></a>
+  </li>
+  <li><%= link_to t('sign_out'), destroy_user_session_path, :method=>'delete' %></li>
+<% else %>
+  <li>
+    <a href="#" data-toggle="modal" data-target="#modalSignUp" class="btn btn-white">  <%=  t('become_a_cook')%></a>
+  <li>
+    <a href="#" data-toggle="modal" data-target="#modalSignIn">  <%=  t('sign_in')%></a>
+  </li>
+<% end %>

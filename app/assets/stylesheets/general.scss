@@ -1,0 +1,91 @@
+body {
+  font-family: 'Open Sans', sans-serif !important;
+}
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.oculto{
+  display:none;
+}
+.form-control {
+  height: 50px;
+  border-radius: 0;
+}
+
+.section-padded {
+  padding: 9em 0;
+}
+
+.section-title {
+  font-size: 4em;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+
+.section-subtitle {
+  display:block;
+  font-size: 2em;
+  margin-bottom: 2em;
+  color: #777;
+}
+
+.color-red {
+  color: $primary-color;
+}
+
+
+.modal-admin {
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 100px;
+}
+
+.pac-container:after {
+  background-image: none !important;
+  height: 0px;
+}
+
+.not-found {
+
+  h1{
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    width: 100%;
+    font-size: 5em;
+  }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.devise-login {
+
+  .modal-admin {
+    top:0;
+    margin-bottom: 100px;
+  }
+}
+
+#error_explanation {
+
+  h2 {
+    font-size: 20px;
+  }
+}

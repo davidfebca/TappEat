@@ -1,0 +1,57 @@
+<%content_for :head do%>
+  <title><%= t('home_meta_title')%></title>
+  <meta name="description" content="<%= t('home_meta_description')%>"/>
+<%end%>
+<section class="claim">
+  <div class="black-layer"></div>
+  <div  class="video-container hidden-xs hidden-sm">
+    <video  preload="metadata" autoplay muted loop class="fillWidth">
+    <!--  <source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" type="video/mp4">-->
+    </video>
+  </div>
+  <div class="wrap text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1><%= t('home_title')%></h1>
+          <span class="hidden-xs"><%= t('home_subtitle')%></span>
+          <!--<a href="#" class="btn btn-white btn-transparent hidden-xs get-started"><%= t('home_works')%></a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search home">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render 'search' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-padded featured text-center">
+  <div class="container">
+    <div class="row">
+      <header class="col-md-12">
+        <h2 class="section-title"><%= t('home_featured')%></h2>
+        <span class="section-subtitle"><%= t('home_featured_subtitle')%></span>
+      </header>
+    </div>
+    <div class="row">
+      <% @products.each do |product| %>
+        <%= render "product", product: product %>
+      <%end%>
+    </div>
+  </div>
+</section>
+<!--
+<section class="categories hidden-sm hidden-xs">
+  <% @categories.each do |category| %>
+    <article class="col-md-6" style="background:url(<%=category.image%>);background-size:cover;">
+      <h2><%=category.name%></h2>
+    </article>
+  <%end%>
+  <div class="clearfix"></div>
+</section>
+-->

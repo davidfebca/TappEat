@@ -1,0 +1,65 @@
+<section class="cart">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 style="margin-bottom:30px;"><%=t('shopping_cart')%></h1>
+      </div>
+    </div>
+    <%if @products.count == 0%>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-info text-center">
+          Yours basket is empty
+        </div>
+      </div>
+    </div>
+    <%end%>
+    <div class="row">
+      <% @products.each do |item|%>
+        <article class="media col-md-6 cart-product">
+          <%@image = asset_url('noPicture.png')%>
+          <%  @image = item[0].images.first.original  if item[0].images.first%>
+          <a class="pull-left" href="<%= products_details_path id:item[0].id%>">
+            <img style="max-width:170px;" data-img="<%=@image%>" src="<%=@image%>" class="media-object img-responsive" alt="<%= item[0].title %>"/>
+          </a>
+          <div class="media-body">
+            <div class="well well-lg">
+              <h4 class="media-heading text-uppercase reviews"><%= item[0].title%></h4>
+              <p><%= item[0].short_description%>
+              </p>
+              <ul>
+                <li class="color-red"><%= item[0].price %> €</li>
+                <li>Quantity: <%= item[1] %></li>
+              </ul>
+              <div class="delete text-right" data-id="<%=item[0].id%>">Remove item</div>
+            </div>
+          </div>
+        </article>
+      <%end%>
+    </div>
+    <%if @products.count > 0%>
+    <div class="row">
+      <div class="col-md-12 text-right basket-total">
+        <hr>
+        Total: <%=@total%> €
+      </div>
+    </div>
+      <div class="row" style="margin:30px 0;margin-right:-15px;">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <form action="<%=new_purchase_path%>" method="post">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <button type="submit" class="btn btn-red form-control"><%= t('checkout')%></button>
+          </form>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</section>
+<%content_for :head do%>
+  <title><%= t('basket_meta_title')%></title>
+  <meta name="description" content="<%= t('basket_meta_description')%>"/>
+<%end%>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>

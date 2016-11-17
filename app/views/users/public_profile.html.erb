@@ -1,0 +1,42 @@
+<section class="dashboard section-padded" style="margin-top:50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <%@image = asset_url('profile.png')%>
+        <%@image = @user.images.first.original if @user.images.first %>
+        <img style="width:100%" src="<%= @image%>" class="img-responsive" alt="profile photo">
+        <ul class="product" style="background:none; border:none;">
+          <li class="product-details" style="padding:0">
+            <%for i in 1..@user.rating%>
+              <span class="rating-star">&#9734;</span>
+            <%end%>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <h1 style="margin-top:0;"><%= @user.name%></h1>
+        <p><%=@user.description%></p>
+      </div>
+    </div>
+    <%if @user.products.any?%>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 style="margin-bottom:30px;"><%=t('my_products')%></h2>
+        </div>
+      </div>
+      <div class="row">
+        <%@user.products.each do |product|%>
+            <%= render "product", product: product %>
+        <%end%>
+      </div>
+    <%end%>
+  </div>
+</section>
+<% #page info %>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :head do%>
+  <title><%=@user.name%><%= t('public_profile_meta_title')%></title>
+  <meta name="description" content="<%= t('public_profile_meta_description')%>"/>
+<%end%>

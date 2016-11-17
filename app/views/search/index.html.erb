@@ -1,0 +1,31 @@
+<input type="hidden" id="resultLat" value="<%=@lat%>"/>
+<input type="hidden" id="resultLng" value="<%=@lng%>">
+<section class="search-results">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8" style="padding:0;">
+        <div id="results">
+          <div class="transparent-layer"></div>
+        </div>
+      </div>
+      <div class="col-md-4 hidden-xs hidden-sm" style="padding:0;">
+        <div id="map" class="map-results"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<% #page info %>
+<%content_for :head do%>
+  <title><%= t('search_meta_title')%></title>
+  <meta name="description" content="<%= t('search_meta_description')%>"/>
+<%end%>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :page_scripts do%>
+  <script>
+    $(document).ready(function(){
+      new resultsController ('map',$('#results'),<%=@lat%>,<%=@lng%>,"<%= asset_url('marker.png')%>");
+    })
+  </script>
+<%end%>

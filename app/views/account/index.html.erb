@@ -1,0 +1,212 @@
+<section class="your-account alert alert-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <%=t('private_space')%>
+        <a class="underline" href=""><%= t('here')%></a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="dashboard">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <%@image = asset_url('profile.png')%>
+        <%@image = @user.images.first.original if @user.images.first %>
+        <img style="width:100%" src="<%= @image%>" class="img-responsive" alt="profile photo">
+      </div>
+      <div class="col-md-9">
+        <strong><%=t('name')%>: </strong> <%= @user.name%><br/>
+        <strong><%=t('email')%>:</strong> <%= @user.email%><br/>
+        <strong><%=t('created_at')%>:</strong> <%= @user.created_at%><br/>
+        <strong><%=t('last_login')%>:</strong> <%= @user.last_sign_in_at%><br/>
+        <strong><%=t('account_type')%>:</strong> <%= t('free')%><br/>
+        <strong class="color-red"><%=t('balance')%>:</strong> <%=@balance%> € <br/>
+        <strong><%=t('profile_image')%>:</strong><br/><br/>
+        <form action="<%=update_user_image_path%>" enctype="multipart/form-data" method="post">
+          <input type="file" name="image">
+          <button type="submit" class="btn btn-red pull-right"><%=t('update')%></button>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+          <div class="col-md-12">
+            <h2><%= t('your_tappeats')%></h2>
+          </div>
+          <%@user.products.each do |product|%>
+          <article class="col-md-3 text-center">
+            <div class="panel panel-default">
+              <a href="<%= edit_product_path id:product.id%>">
+                <div class="panel-body user-product">
+                    <% if product.images.count() == 0%>
+                    <img class="img-responsive" src="<%=asset_path('noPicture')%>" alt="">
+                    <%else%>
+                    <img class="img-responsive" src="<%=product.images.first.original %>" alt="<%= product.title%>">
+                    <%end%>
+                    <span class="delete" data-id="<%= product.id%>">X</span>
+                    <span class="add-image" data-id="<%= product.id%>"><span class="fa fa-photo"></span></span>
+                </div>
+            </a>
+            </div>
+          </article>
+          <%end%>
+          <%if @user.products.count() == 4%>
+            <div class="col-md-12">
+              <%=t('become_premium')%>
+            </div>
+          <%end%>
+          <%if @user.products.count() < 4%>
+            <article class="col-md-3 text-center">
+              <div class="panel panel-default">
+                <div class="panel-body add-product">
+                    <%= t('add_tappeat')%>
+                </div>
+              </div>
+            </article>
+            <div class="col-md-12 add-product-form oculto">
+              <h2><%=t('new_tappeat')%></h2>
+              <%= render 'product_form' %>
+            </div>
+          <%end%>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2><%= t('processing_tappeats')%></h2>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="panel panel-default">
+            <div class="panel-heading text-left"><a href="" class="underline"><%= t('view_all')%></a></div>
+            <div class="panel-body text-left">
+              <%if @tappeats_sold.count() > 0%>
+                <div class="col-md-3">
+                  <%=t('created_at')%>
+                </div>
+                <div class="col-md-3">
+                  <%=t('total')%>
+                </div>
+                <div class="col-md-3">
+                  <%= t('tappeats')%>
+                </div>
+                <div class="col-md-3">
+                  <%= t('actions')%>
+                </div>
+                <%@tappeats_sold.each do |purchase|%>
+                  <div class="col-md-3">
+                    <%= purchase.created_at%>
+                  </div>
+                  <div class="col-md-3">
+                    <%= purchase.total%> €
+                  </div>
+                  <div class="col-md-3">
+                    <%@count = 0%>
+                    <%purchase.items.each do |item| %>
+                      <% @count += item.quantity%>
+                    <%end%>
+                    <%=@count%>
+                  </div>
+                  <div class="col-md-3">
+                    <a href=""><%= t('view')%></a> /
+                    <a href=""><%=t('complete')%></a> /
+                    <a href=""><%=t('chat')%></a>
+                  </div>
+                <%end%>
+              <%else%>
+              <%=t('nothing_to_show')%>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2><%=t('purchase_history')%></h2>
+        </div>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading"><a href="" class="underline"><%=('view_all')%></a></div>
+            <div class="panel-body">
+              <%if @user.purchases.count() > 0%>
+                <div class="col-md-3">
+                  <%=t('created_at')%>
+                </div>
+                <div class="col-md-3">
+                  <%=t('total')%>
+                </div>
+                <div class="col-md-3">
+                  <%= t('tappeats')%>
+                </div>
+                <div class="col-md-3">
+                  <%= t('actions')%>
+                </div>
+                <%@user.purchases.each do |purchase|%>
+                  <div class="col-md-3">
+                    <%= purchase.created_at%>
+                  </div>
+                  <div class="col-md-3">
+                    <%= purchase.total%> €
+                  </div>
+                  <div class="col-md-3">
+                    <%@count = 0%>
+                    <%purchase.items.each do |item| %>
+                      <% @count += item.quantity%>
+                    <%end%>
+                    <%=@count%>
+                  </div>
+                  <div class="col-md-3">
+                    <a href=""><%= t('view')%></a> /
+                    <a href=""><%=t('chat')%></a>
+                  </div>
+                <%end%>
+              <%else%>
+              <%=t('nothing_to_show')%>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2><%=t('thinks_about_you')%></h2>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"><%=t('about_you')%></div>
+          <div class="panel-body">
+            <%=t('nothing_to_show')%>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"><%=t('about_your_tappeats')%></div>
+          <div class="panel-body">
+            <%if @product_comments.any?%>
+              <ul>
+                <%@product_comments.each do |comment|%>
+                  <li><%= comment.user.name%> / <%=comment.product.title%> => <%=comment.content%> </li>
+                <%end%>
+              </ul
+            <%else%>
+              <%=t('nothing_to_show')%>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% #page info %>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :page_scripts do%>
+  <script src="<%= asset_url('mapsearch.js')%>"></script>
+  <script>
+  </script>
+<%end%>
+<%content_for :head do%>
+  <title><%= t('account_meta_title')%></title>
+  <meta name="description" content="<%= t('account_meta_description')%>"/>
+<%end%>

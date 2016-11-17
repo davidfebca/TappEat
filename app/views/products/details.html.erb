@@ -1,0 +1,125 @@
+<%content_for :head do%>
+  <title><%=@product.title%></title>
+  <meta name="description" content="<%=@product.short_description%>"/>
+<%end%>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :page_scripts do%>
+  <script src="<%=asset_url('basket.js')%>"></script>
+<%end%>
+<section class="product-details">
+  <div class="container">
+    <div class="row">
+      <article>
+        <div class="col-md-5">
+          <%@image = asset_url('noPicture.png')%>
+          <%  @image = @product.images.first.original  if @product.images.first%>
+          <img class="img-responsive" src="<%=@image%>" alt="<%=@product.title%>" />
+          <ul>
+            <li class="media">
+              <%=t('cook')%>:
+              <a href="<%=public_profile_path id:@product.user.id%>">
+                <% @current_profile = asset_url('profile.png')%>
+                <%  @current_profile = @product.user.images.first.original  if @product.user.images.count > 0%>
+                <img style="display:inline;margin-left:10px;margin-right:10px;" width="70" class="media-object img-circle" src="<%= @current_profile%>" alt="profile">
+              </a>
+            </li>
+            <li><%=t('category_li')%>: <%=@product.category.name%></li>
+            <%if @product.rating > 0%>
+              <li>
+                <%for i in 1..@product.rating%>
+                  <span class="rating-star">&#9734;</span>
+                <%end%>
+              </li>
+            <%end%>
+            <li class="product-price"><%=t('price')%>: <span class="color-red"><%=@product.price%> € / </span> <small class="color-red"> <%=t('tappeat')%></small></li>
+
+          </ul>
+          <form action="<%=add_item_path%>" method="POST">
+            <div class="row">
+              <%if @stock > 0%>
+                <div class="col-md-3">
+                  <select class="form-control" name="quantity" id="selectQuantity">
+                    <%for i in 1..@stock%>
+                      <option value="<%=i%>"><%=i%></option>
+                    <%end%>
+                  </select>
+                  <input type="hidden" name="product_id" value="<%=@product.id%>">
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                </div>
+                <div class="col-md-9">
+                <button type="submit" class="form-control btn btn-red"><%=t('add_to_cart')%></button>
+                </div>
+              <%else%>
+              <div class="col-md-12">
+              <div class="alert alert-info text-center"><%=t('no_stock')%></div>
+              </div>
+              <%end%>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-7">
+          <h1><%= @product.title %></h1>
+          <p><%=@product.description%></p>
+          <%if current_user%>
+          <hr>
+            <h2><%=t('gustado_producto')%></h2>
+            <form action="<%=new_comment_path%>" method="post" class="comment-form">
+              <div class="form-group">
+                <label><%=t('content')%></label>
+                <textarea name="content" required="required" rows="5" class="form-control"></textarea>
+              </div>
+              <input type="hidden" name="id_product" value="<%=@product.id%>">
+              <button type="submit" class="btn btn-red pull-right"><%=t('comment')%></button>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            </form>
+          <%end%>
+        </div>
+      </article>
+    </div>
+    <%if @comments.any?%>
+      <div class="row">
+        <div class="col-md-12 comments">
+          <h2><%=t('users_say')%></h2>
+
+            <ul class="media-list">
+              <%@comments.each do |comment| %>
+              <li class="media">
+                <a class="pull-left" href="#">
+                  <% @profile_image = asset_url('profile.png')%>
+                  <%  @profile_image = comment.user.images.first.original  if comment.user.images.count > 0%>
+                  <img width="70" class="media-object img-circle" src="<%= @profile_image%>" alt="profile">
+                </a>
+                <div class="media-body">
+                  <div class="well well-lg">
+                      <h4 class="media-heading text-uppercase reviews"><%=comment.user.name%></h4>
+                      <p class="media-comment">
+                        <%= comment.content%>
+                      </p>
+                  </div>
+                </div>
+              </li>
+              <%end%>
+            </ul>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</section>
+<%if @related.any?%>
+  <section class="related">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2><%= t('other_products')%> </h2>
+        </div>
+      </div>
+      <div class="row">
+        <%@related.each do |product|%>
+          <%= render 'product', product:product%>
+        <%end%>
+      </div>
+    </div>
+  </section>
+<%end%>

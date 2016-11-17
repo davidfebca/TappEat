@@ -1,0 +1,36 @@
+<!-- sign up modal -->
+<div class="modal fade user" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="modalSignInLabel">
+  <div class="modal-admin" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="authform">
+          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
+            <h3>Sign in</h3>
+            <%= devise_error_messages! %>
+            <div class="form-group">
+              <%- if devise_mapping.registerable? %>
+              <% end -%>
+              <%= f.label :email %>
+              <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'form-control' %>
+            </div>
+              <%= f.submit 'Sign in', :class => 'btn btn-primary form-control' %>
+              <% if devise_mapping.rememberable? -%>
+                <div class="checkbox" style="width:150px">
+                  <label>
+                    <%= f.check_box :remember_me %> Remember me
+                  </label>
+                </div>
+              <% end -%>
+              <%- if devise_mapping.recoverable? %>
+                <%= link_to "Forgot password?", new_password_path(resource_name), class: 'text-center' %>
+              <% end -%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

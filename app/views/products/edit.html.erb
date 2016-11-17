@@ -1,0 +1,27 @@
+<section class="edit-product">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Edit product</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'product_form' %>
+
+      </div>
+    </div>
+  </div>
+</section>
+<% #page info %>
+<%content_for :search do%>
+  <%=render 'search'%>
+<%end%>
+<%content_for :page_scripts do%>
+  <script src="<%= asset_url('mapsearch.js')%>"></script>
+  <script>
+  $(document).ready(function(){
+
+  })
+  </script>
+<%end%>

@@ -1,0 +1,29 @@
+<header class="header">
+    <div class="row">
+      <div class="col-md-3">
+        <a class="logo" href="<%=root_path%>"><img width="44" height="47"  src="<%=asset_url("marker_white.svg") %>" alt="logo">Tappeat</a>
+      </div>
+      <div class="col-md-5 hidden-xs hidden-sm" style="position:relative;left:15px;padding-right:0;">
+        <div class="form-inside">
+          <%= yield :search%>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <%if !products_in_basket.nil? && products_in_basket > 0%>
+          <a class="cart-items" href="<%= basket_path%>">
+            <%=products_in_basket%>
+            <%= t('items')%>
+          </a>
+        <%end%>
+      </div>
+      <div class="col-md-3 text-right hidden-xs">
+        <nav class="auth-links">
+          <ul>
+            <%= render 'nav_links_for_auth' %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+</header>
+<%= render 'modal_sign_up'%>
+<%= render 'modal_sign_in'%>

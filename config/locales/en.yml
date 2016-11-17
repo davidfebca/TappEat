@@ -1,0 +1,95 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  home_meta_title: "Tappeat, homemade food wherever you are"
+  home_meta_description: "Tappeat, homemade food wherever you are."
+  search_meta_title: "Search food near your location"
+  search_meta_description: "Search food near your location"
+  basket_meta_title: "Your basket - TappEat"
+  basket_meta_description: "Your basket"
+  account_meta_title: "My account - TappEat"
+  account_meta_description: "My personal space"
+  public_profile_meta_title: "'s public profile"
+  public_profile_meta_description: "Public profile"
+  #------- home
+  home_title: "Are you hungry? TappEat"
+  home_subtitle: "Homemade food wherever you are"
+  home_works: "How does it work"
+  home_featured: "Discover our featured tappeats"
+  home_featured_subtitle: "Our best tappeats"
+  #------- application
+  become_a_cook: "Become a cook"
+  sign_in: "Sign in"
+  sign_out: "Sign out"
+  edit_account: "Hi, "
+  im_hungry: "I'm hungry!"
+  search_placeholder: "Where do you want to eat?"
+  my_tappeat: "My tappeat"
+  details: "Details"
+  items: "items"
+  #------- product detail
+  title_comments: "Here some user reviews"
+  subtitle_comments: "A super large cool subtitle for this section"
+  other_products: "You may also like..."
+  category_li: "Category"
+  ralting: "Rating"
+  no_stock: "Product out of stock"
+  users_say: "Users say..."
+  tappeat: "tappeat"
+  add_to_cart: "Add to basket"
+  gustado_producto: "You liked this tappeat? Write a comment"
+  #------- not found
+  not_found_title: "Sorry, page not found"
+  shopping_cart: "Your basket"
+  #------ basket
+  checkout: "Checkout"
+  #------ checkout
+  checkout_meta_title: "Chekout title"
+  checkout_meta_description: "Checkout meta description"
+  summary: "Summary of your purchase"
+  #------ my account
+  private_space: "Hi! Welcome to your private space where you can manage your account. Watch a demo "
+  here: "here"
+  email: "Email"
+  name: "Name"
+  created_at: "Created at"
+  last_login: "Last login at"
+  account_type: "Account type"
+  free: "free"
+  profile_image: "Profile image"
+  your_tappeats: "Your tappeats"
+  become_premium: "Become premium to add more products"
+  add_tappeat: "Add tappeat"
+  new_tappeat: "New tappeat"
+  processing_tappeats: "Processing tappeats"
+  view_all: "View all"
+  total: "Total"
+  tappeats: "tappeats"
+  actions: "Actions"
+  chat: "chat"
+  complete: "complete"
+  view: "view"
+  nothing_to_show: "Nothing to show"
+  purchase_history: "Purchase history"
+  thinks_about_you: "What users think of you..."
+  about_you: "About you"
+  about_your_tappeats: "About your tappeats"

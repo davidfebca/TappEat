@@ -1,0 +1,42 @@
+<%= form_for @product , method: "POST", url: {controller:"products", action: "create"} do |f| %>
+  <div class="form-group">
+    <%= f.label :title%>
+    <%= f.text_field :title,class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :short_description%> <small>Max 100 chars</small>
+    <%= f.text_field :short_description, class:"form-control" %>
+    <span class="count">0</span>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id%>
+    <%= f.select(:category_id, @categories.collect{|u| [u.name, u.id]},{},{ class: 'form-control' })-%>
+  </div>
+  <div class="form-group">
+    <%= f.label :price%>
+    <%= f.text_field :price, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :expiration%>
+    <%= f.datetime_local_field :expiration, class:"form-control",style:"width:300px;" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :stock%>
+    <%= f.number_field :stock, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field :id%>
+    <%= f.label :description%>
+    <%= f.text_area :description,rows:7, class:"form-control" %>
+  </div>
+  <label>Location</label><small> (Search in the box bellow) </small>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div id="product-map"></div>
+  <div class="form-group">
+    <label>Product image</label>
+    <%= f.file_field :image %>
+  </div>
+  <input type="hidden" name="product[lat]" id="product_lat">
+  <input type="hidden" name="product[lng]" id="product_lng">
+  <%= f.submit "Create", class:"btn btn-red pull-right" %>
+<% end %>

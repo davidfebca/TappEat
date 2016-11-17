@@ -1,0 +1,68 @@
+.dashboard {
+  font-size: 1.4em;
+  padding: 20px 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .add-product {
+    padding: 64px;
+    cursor: pointer;
+  }
+
+  .btn {
+    padding: 5px 30px;
+  }
+
+
+
+}
+
+.form-group {
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  color: green;
+}
+
+.user-product {
+  &:hover .delete {
+    display: block;
+  }
+
+  .delete {
+    position: absolute;
+    right: 15px;
+    top: -15px;
+    color: $primary-color;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+    display: none;
+  }
+
+  img {
+    max-height: 130px;
+    width: 100%;
+  }
+}
+
+#product-map{
+  height: 400px;
+  margin-bottom:15px;
+}
+
+#pac-input{
+  width: 400px;
+  height: 40px;
+  position: relative;
+  margin-top: 10px;
+  padding-left: 15px;
+}
